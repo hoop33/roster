@@ -1,10 +1,12 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/go-kit/kit/log"
 	"github.com/hoop33/roster/players"
@@ -28,15 +30,27 @@ func main() {
 	ps := createPlayersService(db, logger)
 	startLogger.Log("msg", "created players service")
 
-	players, err := ps.ListPlayers(context.Background(), "QB")
-	if err != nil {
-		logger.Log("msg", "failed to list players", "err", err)
-		os.Exit(1)
-	}
+	ep := players.NewEndpoints(ps)
+	startLogger.Log("msg", "created endpoints")
 
-	for _, player := range players {
-		logger.Log("msg", "listing players", "player", player.String())
-	}
+	errs := make(chan error)
+
+	go func() {
+		httpTransport := players.NewHTTPTransport(ep, logger)
+		startLogger.Log("msg", "created http transport")
+
+		httpAddr := ":9090"
+		startLogger.Log("transport", "http", "address", httpAddr, "msg", "listening")
+		errs <- http.ListenAndServe(httpAddr, httpTransport)
+	}()
+
+	go func() {
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
+		errs <- fmt.Errorf("%s", <-c)
+	}()
+
+	logger.Log("terminated", <-errs)
 }
 
 func createLogger() log.Logger {
