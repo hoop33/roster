@@ -9,7 +9,10 @@
 
 [[projects]]
   name = "github.com/go-kit/kit"
-  packages = ["log"]
+  packages = [
+    "endpoint",
+    "log"
+  ]
   revision = "ca4112baa34cb55091301bdc13b1420a122b1b9e"
   version = "v0.7.0"
 
@@ -70,6 +73,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a04f32587a43ac46aec6fc4df8a08f58e634dad1cc56206a43bb3d7262ae3cc2"
+  inputs-digest = "7303001614720adcb2ded5608e635f89f6de549ce3a2bd69ad921b46f59e3f15"
   solver-name = "gps-cdcl"
   solver-version = 1
