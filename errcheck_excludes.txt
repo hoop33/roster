@@ -1,0 +1,2 @@
+(github.com/hoop33/roster/vendor/github.com/go-kit/kit/log.Logger).Log
+(*database/sql.DB).Close
