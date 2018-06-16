@@ -4,33 +4,44 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 
+	"github.com/go-kit/kit/log"
 	"github.com/hoop33/roster/players"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
 func main() {
+	logger := createLogger()
+	startLogger := log.With(logger, "tag", "start")
+	startLogger.Log("msg", "created logger")
+
 	db, err := createDatabase()
 	if err != nil {
-		log.Println("failed to connect to database:", err)
+		startLogger.Log("msg", "failed to connect to database", "err", err)
 		os.Exit(1)
 	}
 	defer db.Close()
+	startLogger.Log("msg", "connected to database")
 
-	ps := createPlayersService(db)
+	ps := createPlayersService(db, logger)
+	startLogger.Log("msg", "created players service")
 
 	players, err := ps.ListPlayers(context.Background(), "QB")
 	if err != nil {
-		log.Println("failed to list players:", err)
+		logger.Log("msg", "failed to list players", "err", err)
 		os.Exit(1)
 	}
 
 	for _, player := range players {
-		log.Println(player.String())
+		logger.Log("msg", "listing players", "player", player.String())
 	}
+}
+
+func createLogger() log.Logger {
+	logger := log.NewLogfmtLogger(log.NewSyncWriter(os.Stdout))
+	return log.With(logger, "ts", log.DefaultTimestampUTC())
 }
 
 func createDatabase() (*sqlx.DB, error) {
@@ -50,7 +61,8 @@ func createDatabase() (*sqlx.DB, error) {
 	return db, err
 }
 
-func createPlayersService(db *sqlx.DB) players.Service {
+func createPlayersService(db *sqlx.DB, logger log.Logger) players.Service {
 	ps := players.NewService(db)
+	ps = players.NewLoggingService(log.With(logger, "tag", "players"), ps)
 	return ps
 }

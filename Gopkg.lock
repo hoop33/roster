@@ -8,6 +8,24 @@
   version = "v1.1.0"
 
 [[projects]]
+  name = "github.com/go-kit/kit"
+  packages = ["log"]
+  revision = "ca4112baa34cb55091301bdc13b1420a122b1b9e"
+  version = "v0.7.0"
+
+[[projects]]
+  name = "github.com/go-logfmt/logfmt"
+  packages = ["."]
+  revision = "390ab7935ee28ec6b286364bba9b4dd6410cb3d5"
+  version = "v0.3.0"
+
+[[projects]]
+  name = "github.com/go-stack/stack"
+  packages = ["."]
+  revision = "259ab82a6cad3992b4e21ff5cac294ccb06474bc"
+  version = "v1.7.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/jmoiron/sqlx"
   packages = [
@@ -15,6 +33,12 @@
     "reflectx"
   ]
   revision = "0dae4fefe7c0e190f7b5a78dac28a1c82cc8d849"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/kr/logfmt"
+  packages = ["."]
+  revision = "b84e30acd515aadc4b783ad4ff83aff3299bdfe0"
 
 [[projects]]
   branch = "master"
@@ -46,6 +70,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "33a57cb82d81aa7e513d3d718683e921ed8741f77605fecd25788b7fa2639162"
+  inputs-digest = "a04f32587a43ac46aec6fc4df8a08f58e634dad1cc56206a43bb3d7262ae3cc2"
   solver-name = "gps-cdcl"
   solver-version = 1
