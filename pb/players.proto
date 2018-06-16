@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package pb;
+
+service Players {
+  rpc ListPlayers(ListPlayersRequest) returns (ListPlayersResponse) {}
+  rpc GetPlayer(GetPlayerRequest) returns (GetPlayerResponse) {}
+  rpc SavePlayer(SavePlayerRequest) returns (SavePlayerResponse) {}
+  rpc DeletePlayer(DeletePlayerRequest) returns (DeletePlayerResponse) {}
+}
+
+message Player {
+  int32 id = 1;
+  string name = 2;
+  string number = 3;
+  string position = 4;
+  string height = 5;
+  string weight = 6;
+  string age = 7;
+  int32 experience = 8;
+  string college = 9;
+}
+
+message ListPlayersRequest {
+  string position = 1;
+}
+
+message ListPlayersResponse {
+  repeated Player players = 1;
+  string err = 2;
+}
+
+message GetPlayerRequest {
+  int32 id = 1;
+}
+
+message GetPlayerResponse {
+  Player player = 1;
+  string err = 2;
+}
+
+message SavePlayerRequest {
+  Player player = 1;
+}
+
+message SavePlayerResponse {
+  Player player = 1;
+  bool created = 2;
+  string err = 3;
+}
+
+message DeletePlayerRequest {
+  int32 id = 1;
+}
+
+message DeletePlayerResponse {
+  string err = 1;
+}
