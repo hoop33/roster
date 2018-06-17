@@ -3,15 +3,18 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/go-kit/kit/log"
+	"github.com/hoop33/roster/pb"
 	"github.com/hoop33/roster/players"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"google.golang.org/grpc"
 )
 
 func main() {
@@ -42,6 +45,24 @@ func main() {
 		httpAddr := ":9090"
 		startLogger.Log("transport", "http", "address", httpAddr, "msg", "listening")
 		errs <- http.ListenAndServe(httpAddr, httpTransport)
+	}()
+
+	go func() {
+		grpcTransport := players.NewGRPCTransport(ep, logger)
+		startLogger.Log("msg", "created grpc transport")
+
+		grpcAddr := ":9091"
+		listener, err := net.Listen("tcp", grpcAddr)
+		if err != nil {
+			errs <- err
+			return
+		}
+		startLogger.Log("msg", "started grpc listener", "address", grpcAddr)
+
+		grpcServer := grpc.NewServer()
+		pb.RegisterPlayersServer(grpcServer, grpcTransport)
+		startLogger.Log("transport", "grpc", "address", grpcAddr, "msg", "listening")
+		errs <- grpcServer.Serve(listener)
 	}()
 
 	go func() {
