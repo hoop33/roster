@@ -121,9 +121,16 @@ type Endpoint func(ctx context.Context,
 
 ## Step 5: Protocol Buffers
 
+* https://developers.google.com/protocol-buffers/
+* Install `protoc` compiler
+* Install language-specific plugin
+* Create `.proto` file(s)
+
 ---
 
 ## Step 6: Add gRPC Transport
+
+* https://grpc.io
 
 ---
 
@@ -131,6 +138,8 @@ type Endpoint func(ctx context.Context,
 
 * Security
 * Other transports?
+* **Go Programming Blueprints, Second Edition** by Mat Ryer
+* https://gokit.io
 
 ---
 
