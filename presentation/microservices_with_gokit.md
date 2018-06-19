@@ -7,7 +7,7 @@
 * Email: hoop33@gmail.com
 * Blog: grailbox.com
 
-![right,filtered](gokit-logo-header.png)
+![right,fit,filtered](gokit-logo-header.png)
 
 ---
 
@@ -41,6 +41,8 @@ func (p *Person) Greet() {
 ```
 
 ---
+
+## Interfaces
 
 ```go
 type Greetable interface{
@@ -85,7 +87,7 @@ CREATE TABLE IF NOT EXISTS players (
 
 https://www.jaguars.com/team/players-roster/
 
-![right,fit,filtered](jacksonville-jaguars-logo-transparent.png)
+![right,fit](jacksonville-jaguars-logo-transparent.png)
 
 ---
 
