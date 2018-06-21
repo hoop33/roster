@@ -12,6 +12,7 @@ $ createdb roster
 ```
 
 3. Follow instructions at <https://grpc.io/docs/quickstart/go.html> to install Protocol Buffers 3 and grpc
+<br/>Installation for [Macintosh Install Instructions](https://stackoverflow.com/a/27709931/5283424)
 
 4. Get the code
 
