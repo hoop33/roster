@@ -11,6 +11,17 @@
 
 ---
 
+## Agenda
+
+* Just Enough Go
+* Introduce Go kit
+* Build a CLI CRUD app
+* Add HTTP
+* Add gRPC
+* Build a Node client
+
+---
+
 ## Just Enough Go
 
 * "C 2.0"
