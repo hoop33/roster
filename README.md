@@ -11,9 +11,17 @@
 $ createdb roster
 ```
 
-3. Follow instructions at <https://grpc.io/docs/quickstart/go.html> to install Protocol Buffers 3 and grpc
+3. Install Go, following instructions at <https://golang.org/doc/install> or, for Mac, you can just use homebrew:
 
-4. Get the code
+```sh
+$ brew install go
+```
+
+*Note:* Older installation guides indicate setting more environment variables than necessary. The page at <https://github.com/golang/go/wiki/SettingGOPATH> contains current information on Go's environment variables.
+
+4. Follow instructions at <https://grpc.io/docs/quickstart/go.html> to install gRPC and Protocol Buffers 3
+
+5. Get the code
 
 ```sh
 $ go get -u github.com/hoop33/roster
@@ -22,7 +30,7 @@ $ make deps
 $ make
 ```
 
-5. Run the app, which will create the `players` table
+6. Run the app, which will create the `players` table
 
 ```sh
 $ ROSTER_USER=<db user> ROSTER_PASSWORD=<db password> ./roster
