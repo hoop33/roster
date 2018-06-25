@@ -51,6 +51,26 @@ COPY players(name,number,position,height,weight,age,experience,college)
 FROM '<path to file>/players.csv' DELIMITER ',' CSV HEADER;
 ```
 
+## Troubleshooting
+
+If you see an error around `grpc` libraries, e.g., :
+
+```sh
+package google.golang.org/grpc/grpclb/grpc_lb_v1/messages: cannot find package "google.golang.org/grpc/grpclb/grpc_lb_v1/messages" in any of:
+	/usr/local/Cellar/go/1.10.3/libexec/src/google.golang.org/grpc/grpclb/grpc_lb_v1/messages (from $GOROOT)
+	/Users/<user>/go/src/google.golang.org/grpc/grpclb/grpc_lb_v1/messages (from $GOPATH)
+```
+
+You may have a mismatch between the `grpc` libraries in your vendored files and the ones that `protoc` is picking up. To get them in sync, try getting the latest for both:
+
+```sh
+$ go get -u google.golang.org/grpc
+$ cd $GOPATH/src/github.com/hoop33/roster
+$ dep ensure -update google.golang.org/grpc
+```
+
+See a discussion at <https://github.com/grpc/grpc-go/issues/581>
+
 ## Walkthrough
 
 For each step, check out the tag, build the app, and run:
@@ -83,6 +103,17 @@ Nothing new integrated into our application in this step. We define our protocol
 ### Step 6: Add a gRPC Transport (step_6)
 
 Now we can access our data over gRPC.
+
+## Acknowledgments
+
+* Thanks to Michael Dimmitt <https://github.com/michaeldimmitt> for troubleshooting the installation steps
+* Go kit <https://gokit.io/> 
+* sqlx <http://jmoiron.github.io/sqlx/>
+* Testify <https://github.com/stretchr/testify>
+* go-sqlmock <https://github.com/DATA-DOG/go-sqlmock>
+* gRPC <https://grpc.io/>
+
+Apologies for any I've missed.
 
 ## License
 
