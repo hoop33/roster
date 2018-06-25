@@ -19,7 +19,11 @@ $ brew install go
 
 *Note:* Older installation guides indicate setting more environment variables than necessary. The page at <https://github.com/golang/go/wiki/SettingGOPATH> contains current information on Go's environment variables.
 
-4. Follow instructions at <https://grpc.io/docs/quickstart/go.html> to install gRPC and Protocol Buffers 3
+4. Follow instructions at <https://grpc.io/docs/quickstart/go.html> to install gRPC and Protocol Buffers 3. Note that, for the Protocol Buffers step, if you use homebrew on a Mac you can use:
+
+```sh
+$ brew install protobuf
+```
 
 5. Get the code
 
