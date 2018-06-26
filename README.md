@@ -31,10 +31,22 @@ $ brew install protobuf
 $ go get -u github.com/hoop33/roster
 $ cd $GOPATH/src/github.com/hoop33/roster
 $ make deps
+$ dep ensure -update
 $ make
 ```
 
-6. Run the app, which will create the `players` table
+6. Ensure postgress is working correctly.
+
+```sh
+$ psql #logs in as super user
+```
+```psql
+\connect roster
+psql=# CREATE USER <db user> WITH SUPERUSER PASSWORD <'password'>;
+psql=#\q
+```
+
+7. Run the app, which will create the `players` table
 
 ```sh
 $ ROSTER_USER=<db user> ROSTER_PASSWORD=<db password> ./roster
