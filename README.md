@@ -16,8 +16,8 @@ $ createdb roster
 ```sh
 $ brew install go
 $ brew install protobuf
-$ # Add the below line to your $HOME/.bashrc
-$ export GOROOT=/usr/local/opt/go/libexec; export GOPATH=$HOME/go; export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> $HOME/.bashrc; . $HOME/.bashrc;
+$ # Add the below line to your appropriate "rc" file for your shell: (bashrc, zshrc, .fishrc, etc)
+$ export GOPATH=$HOME/go; export PATH=$PATH:$GOPATH/bin
 
 ```
 
