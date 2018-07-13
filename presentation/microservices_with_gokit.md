@@ -28,6 +28,7 @@
 * Cross-platform
 * Compiled
 * Garbage collected
+* Search `golang` instead of `go`
 * https://golang.org
 
 ![right,filtered](Go-Logo_Black.png)
