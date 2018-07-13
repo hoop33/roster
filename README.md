@@ -15,6 +15,10 @@ $ createdb roster
 
 ```sh
 $ brew install go
+$ brew install protobuf
+$ # Add the below line to your appropriate "rc" file for your shell: (bashrc, zshrc, .fishrc, etc)
+$ export GOPATH=$HOME/go; export PATH=$PATH:$GOPATH/bin
+
 ```
 
 *Note:* Older installation guides indicate setting more environment variables than necessary. The page at <https://github.com/golang/go/wiki/SettingGOPATH> contains current information on Go's environment variables.
