@@ -6,6 +6,7 @@
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: grailbox.com
+* Demo: https://github.com/hoop33/roster
 
 ![right,fit,filtered](gokit-logo-header.png)
 
