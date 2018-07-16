@@ -165,3 +165,5 @@ type Endpoint func(ctx context.Context,
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: grailbox.com
+* Service: https://github.com/hoop33/roster
+* Client: https://github.com/hoop33/roster-client
