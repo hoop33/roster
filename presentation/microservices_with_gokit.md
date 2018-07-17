@@ -1,3 +1,5 @@
+footer: https://github.com/hoop33/roster
+
 # Building Microservices in Go Using Go kit
 
 ## Rob Warner
@@ -6,7 +8,6 @@
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: grailbox.com
-* Demo: https://github.com/hoop33/roster
 
 ![right,fit,filtered](gokit-logo-header.png)
 
@@ -20,6 +21,12 @@
 * Add HTTP
 * Add gRPC
 * Build a Node client
+
+---
+
+![inline 100%](tweet.png)
+
+https://twitter.com/hshepherdCC/status/1017429517374287872
 
 ---
 
@@ -165,5 +172,3 @@ type Endpoint func(ctx context.Context,
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: grailbox.com
-* Service: https://github.com/hoop33/roster
-* Client: https://github.com/hoop33/roster-client
