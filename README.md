@@ -120,6 +120,26 @@ Nothing new integrated into our application in this step. We define our protocol
 
 Now we can access our data over gRPC.
 
+## Building
+
+The make file has various targets. To quickly build, run:
+
+```sh
+$ make quick
+```
+
+To run all the linters and tests, run:
+
+```sh
+$ make
+```
+
+To run a test coverage report, run:
+
+```sh
+$ make coverage
+```
+
 ## Acknowledgments
 
 * Thanks to Michael Dimmitt <https://github.com/michaeldimmitt> for troubleshooting the installation steps
