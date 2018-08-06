@@ -436,11 +436,10 @@ https://github.com/hoop33/roster-client
 
 ---
 
-## Next Steps
+## Further Information
 
-* Security
-* Other transports?
 * **Go Programming Blueprints, Second Edition** by Mat Ryer
+* packagemain: https://youtu.be/1ScP5DyS1_g
 * https://gokit.io
 
 ---
