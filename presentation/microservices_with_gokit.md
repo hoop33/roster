@@ -7,7 +7,7 @@ footer: https://github.com/hoop33/roster
 * GitHub: @hoop33
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
-* Blog: grailbox.com
+* Blog: https://grailbox.com
 
 ![right,fit,filtered](gokit-logo-header.png)
 
@@ -450,4 +450,4 @@ https://github.com/hoop33/roster-client
 * GitHub: @hoop33
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
-* Blog: grailbox.com
+* Blog: https://grailbox.com
