@@ -8,6 +8,7 @@ footer: https://github.com/hoop33/roster
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: https://grailbox.com
+* Repo: https://github.com/hoop33/roster
 
 ![right,fit,filtered](gokit-logo-header.png)
 
@@ -129,7 +130,8 @@ type service struct {
 	db *sqlx.DB
 }
 
-func (p *service) ListPlayers(_ context.Context, position string) ([]models.Player, error) {
+func (p *service) ListPlayers(_ context.Context, position string) 
+  ([]models.Player, error) {
 	players, err := models.ListPlayers(p.db, position)
 	if err == sql.ErrNoRows {
 		return nil, errNotFound
@@ -137,6 +139,8 @@ func (p *service) ListPlayers(_ context.Context, position string) ([]models.Play
 	return players, err
 }
 ```
+
+:football:
 
 ---
 
@@ -148,13 +152,33 @@ type loggingService struct {
 	next   Service
 }
 
-func (l *loggingService) ListPlayers(ctx context.Context, position string) (players []models.Player, err error) {
+func (l *loggingService) ListPlayers(ctx context.Context, position string) 
+  (players []models.Player, err error) {
 	defer func(begin time.Time) {
-		l.logger.Log("msg", "listing players", "pos", position, "num", len(players), "err", err, "took", time.Since(begin))
+		l.logger.Log("msg", "listing players", 
+		             "pos", position, 
+		             "num", len(players), 
+		             "err", err, "took", 
+		             time.Since(begin))
 	}(time.Now())
+
 	return l.next.ListPlayers(ctx, position)
 }
 ```
+
+---
+
+## Step 2 (cont): Chain Services
+
+```go
+func createPlayersService(db *sqlx.DB, logger log.Logger) players.Service {
+	ps := players.NewService(db)
+	ps = players.NewLoggingService(log.With(logger, "tag", "players"), ps)
+	return ps
+}
+```
+
+:football:
 
 --- 
 
@@ -189,7 +213,7 @@ func NewEndpoints(s Service) *Endpoints {
 
 ---
 
-## Step 3 (cont): An Endpoint
+## Step 3 (cont): Request/Response
 
 ```go
 type listPlayersRequest struct {
@@ -200,7 +224,13 @@ type listPlayersResponse struct {
 	Players []models.Player `json:"players,omitempty"`
 	Err     string          `json:"error,omitempty"`
 }
+```
 
+---
+
+## Step 3 (cont): An Endpoint
+
+```go
 func makeListPlayersEndpoint(s Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(listPlayersRequest)
@@ -216,6 +246,8 @@ func makeListPlayersEndpoint(s Service) endpoint.Endpoint {
 	}
 }
 ```
+
+:football:
 
 ---
 
@@ -271,6 +303,8 @@ func encodeHTTPListPlayersResponse(ctx context.Context, w http.ResponseWriter, r
 	r.Handle("/v1/players/{id}", updatePlayerHandler).Methods("PUT")
 	r.Handle("/v1/players/{id}", deletePlayerHandler).Methods("DELETE")
 ```
+
+:football:
 
 ---
 
@@ -412,6 +446,12 @@ type PlayersServer interface {
 func RegisterPlayersServer(s *grpc.Server, srv PlayersServer) {
 	s.RegisterService(&_Players_serviceDesc, srv)
 }
+
+...
+
+grpcTransport := players.NewGRPCTransport(ep, logger)
+grpcServer := grpc.NewServer()
+pb.RegisterPlayersServer(grpcServer, grpcTransport)
 ```
 
 ---
@@ -419,7 +459,8 @@ func RegisterPlayersServer(s *grpc.Server, srv PlayersServer) {
 ## Step 6 (cont): Handling gRPC Calls
 
 ```go
-func (s *grpcTransport) ListPlayers(ctx context.Context, r *pb.ListPlayersRequest) (*pb.ListPlayersResponse, error) {
+func (s *grpcTransport) ListPlayers(ctx context.Context, r *pb.ListPlayersRequest) 
+  (*pb.ListPlayersResponse, error) {
 	_, resp, err := s.listPlayers.ServeGRPC(ctx, r)
 	if err != nil {
 		return nil, err
@@ -433,6 +474,8 @@ func (s *grpcTransport) ListPlayers(ctx context.Context, r *pb.ListPlayersReques
 ## Step 6 (cont): Making gRPC Call from Node.js
 
 https://github.com/hoop33/roster-client
+
+:football:
 
 ---
 
@@ -450,3 +493,4 @@ https://github.com/hoop33/roster-client
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: https://grailbox.com
+* Repo: https://github.com/hoop33/roster
