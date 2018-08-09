@@ -140,6 +140,10 @@ To run a test coverage report, run:
 $ make coverage
 ```
 
+## Presentation
+
+The accompanying presentation can be found at `presentation/microservices_with_gokit.md` and is designed to be viewed with [Deckset](https://www.deckset.com).
+
 ## Acknowledgments
 
 * Thanks to Michael Dimmitt <https://github.com/michaeldimmitt> for troubleshooting the installation steps
