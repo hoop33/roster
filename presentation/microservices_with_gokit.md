@@ -1,4 +1,5 @@
 footer: https://github.com/hoop33/roster
+slidenumbers: true
 
 # Building Microservices in Go Using Go kit
 
