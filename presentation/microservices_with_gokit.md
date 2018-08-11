@@ -94,9 +94,11 @@ func ListPlayers(db *sqlx.DB, position string) ([]Player, error) {
 	var players []Player
 	var err error
 	if position == "" {
-		err = db.Select(&players, "SELECT * FROM players ORDER BY number ASC")
+		err = db.Select(&players, 
+		  "SELECT * FROM players ORDER BY number ASC")
 	} else {
-		err = db.Select(&players, "SELECT * FROM players WHERE position = $1 ORDER BY number ASC", position)
+		err = db.Select(&players, 
+		  "SELECT * FROM players WHERE position = $1 ORDER BY number ASC", position)
 	}
 	if err != nil {
 		return nil, err
@@ -232,7 +234,8 @@ type listPlayersResponse struct {
 
 ```go
 func makeListPlayersEndpoint(s Service) endpoint.Endpoint {
-	return func(ctx context.Context, request interface{}) (interface{}, error) {
+	return func(ctx context.Context, request interface{}) 
+	  (interface{}, error) {
 		req := request.(listPlayersRequest)
 		players, err := s.ListPlayers(ctx, req.Position)
 		if err != nil {
@@ -273,13 +276,15 @@ func NewHTTPTransport(ep *Endpoints, logger log.Logger) http.Handler {
 ## Step 4 (cont): HTTP Request/Response
 
 ```go
-func decodeHTTPListPlayersRequest(_ context.Context, r *http.Request) (interface{}, error) {
+func decodeHTTPListPlayersRequest(_ context.Context, r *http.Request) 
+  (interface{}, error) {
 	return listPlayersRequest{
 		Position: r.URL.Query().Get("position"),
 	}, nil
 }
 
-func encodeHTTPListPlayersResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
+func encodeHTTPListPlayersResponse(ctx context.Context, 
+  w http.ResponseWriter, response interface{}) error {
 	lpr := response.(listPlayersResponse)
 	if lpr.Err == "" {
 		return encodeHTTPResponse(ctx, http.StatusOK, w, response)
@@ -384,7 +389,8 @@ type grpcTransport struct {
 ## Step 6 (cont): Add gRPC Transport
 
 ```go
-func NewGRPCTransport(ep *Endpoints, logger log.Logger) pb.PlayersServer {
+func NewGRPCTransport(ep *Endpoints, logger log.Logger) 
+  pb.PlayersServer {
 	opts := []grpc.ServerOption{
 		grpc.ServerErrorLogger(log.With(logger, "tag", "grpc")),
 	}
@@ -403,17 +409,25 @@ func NewGRPCTransport(ep *Endpoints, logger log.Logger) pb.PlayersServer {
 
 ---
 
-## Step 6 (cont): gRPC Request/Response
+## Step 6 (cont): gRPC Request
 
 ```go
-func decodeGRPCListPlayersRequest(_ context.Context, r interface{}) (interface{}, error) {
+func decodeGRPCListPlayersRequest(_ context.Context, r interface{}) 
+  (interface{}, error) {
 	req := r.(*pb.ListPlayersRequest)
 	return listPlayersRequest{
 		Position: req.Position,
 	}, nil
 }
+```
 
-func encodeGRPCListPlayersResponse(_ context.Context, r interface{}) (interface{}, error) {
+---
+
+## Step 6 (cont): gRPC Response
+
+```go
+func encodeGRPCListPlayersResponse(_ context.Context, r interface{}) 
+  (interface{}, error) {
 	resp := r.(listPlayersResponse)
 
 	players := make([]*pb.Player, len(resp.Players))
@@ -444,9 +458,13 @@ type PlayersServer interface {
 func RegisterPlayersServer(s *grpc.Server, srv PlayersServer) {
 	s.RegisterService(&_Players_serviceDesc, srv)
 }
+```
 
-...
+---
 
+## Step 6 (cont): Tying Transport to Server
+
+```go
 grpcTransport := players.NewGRPCTransport(ep, logger)
 grpcServer := grpc.NewServer()
 pb.RegisterPlayersServer(grpcServer, grpcTransport)
