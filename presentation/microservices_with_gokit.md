@@ -247,8 +247,6 @@ func makeListPlayersEndpoint(s Service) endpoint.Endpoint {
 }
 ```
 
-:football:
-
 ---
 
 ## Step 4: Add HTTP Transport
