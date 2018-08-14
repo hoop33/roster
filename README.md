@@ -1,4 +1,6 @@
 # Roster
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhoop33%2Froster.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fhoop33%2Froster?ref=badge_shield)
+
 
 > A demo project for understanding Go kit
 
@@ -161,3 +163,6 @@ Copyright &copy; 2018 Rob Warner
 
 Licensed under the [MIT License](https://hoop33.mit-license.org/)
 
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhoop33%2Froster.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fhoop33%2Froster?ref=badge_large)
